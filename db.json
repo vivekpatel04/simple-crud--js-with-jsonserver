@@ -1,0 +1,54 @@
+{
+	"student" : [
+	{
+		"id":"E1",
+		"rno":1,
+		"name":"Abhi"
+	},
+	{
+		"id":"E2",
+		"rno":2,
+		"name":"Jonny"
+	},
+	{
+		"id":"E3",
+		"rno":3,
+		"name":"Charles"
+	},
+	{
+		"id":"E4",
+		"rno":4,
+		"name":"Robert"
+	},
+	{
+		"id":"E5",
+		"rno":5,
+		"name":"Stephen"
+	},
+	{
+		"id":"E6",
+		"rno":6,
+		"name":"Harry"
+	},
+	{
+		"id":"E7",
+		"rno":7,
+		"name":"Kevin"
+	},
+	{
+		"id":"E8",
+		"rno":8,
+		"name":"Yash"
+	},
+	{
+		"id":"E9",
+		"rno":9,
+		"name":"Garry"
+	},
+	{
+		"id":"E10",
+		"rno":10,
+		"name":"Nick"
+	}
+]
+}

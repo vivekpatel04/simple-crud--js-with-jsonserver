@@ -1,0 +1,27 @@
+<html>
+<head>
+    <script type="text/javascript">
+        fetch('http://localhost:3000/student',{
+            method:"POST"
+        })
+        .then(res=>res.json())
+        .then(json=>console.log(json));
+    </script>
+</head>
+<body>
+    <form action="" method="post">
+        <h2>Enter Details</h2>
+        <table border=1>
+            <tr>
+                <td>R.No.<input type="text"></td>
+            </tr>
+            <tr>
+                <td>Name<input type="text"></td>
+            </tr>
+        </table><br>
+        <button id="save">SAVE</button>
+        <button id="cancel">CANCEL</button>
+    </form>
+    
+</body>
+</html>

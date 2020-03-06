@@ -1,0 +1,33 @@
+<html>
+<head>
+    <script type="text/javascript">
+    fetch('http://localhost:3000/student')
+    .then(function(res)
+    {
+        return res.json();
+    })
+    .then(function(data)
+    {
+        let result = "";
+        data.forEach(std => {
+            let { id, rno, name} = std
+            result +=
+            `<tr>
+                <td> ${id}</td>
+                <td> ${rno}</td>
+                <td> ${name} </td>
+            </tr>
+            `;
+            document.getElementById(`result`).innerHTML=result;
+        });
+    })
+    </script>
+</head>
+<body>
+<div>
+    <h2>Student Info</h2>
+     <table border=1 id="result"></table>
+</div><br><br>
+<button id="btn" onclick="window.open('file:///home/greycell/practise_task/form.html')">Add Student</button>  
+</body>
+</html>
