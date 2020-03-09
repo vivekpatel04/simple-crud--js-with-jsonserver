@@ -1,27 +1,87 @@
 <html>
 <head>
     <script type="text/javascript">
-        fetch('http://localhost:3000/student',{
-            method:"POST"
-        })
-        .then(res=>res.json())
-        .then(json=>console.log(json));
+        const id = parseInt(localStorage.getItem("sid"));
+        let test = parseInt(0);
+        if (id != 0) {
+            fetch('http://localhost:3000/student/${id}')
+                .then(response => {
+                    response.json().then(json => {
+                        console.log(":Response json:", json);
+                        document.getElementById("srno").value = json.rno;
+                        document.getElementById("sname").value = json.name;
+                        document.getElementById("save").value = "save";
+                    
+                    })
+                })
+        }
+        function validation() {
+            console.log("validation")
+            const name = document.querySelector('input[name="sname"]').value;
+            const rno = parseInt(document.querySelector('input[name="srno"]').value);
+            console.log("name,rno :: validation :", name,rno);
+            let num = parseInt(0);
+            if (test == 1) {
+                patchData(`http://localhost:3000/student/${rno}`, { "name": sname}).then(data => console.log(JSON.stringify(data))).catch(error => console.error(error));
+                alert("Data updated");
+                window.location = "student.html";
+            }
+            else {
+                fetch('http://localhost:3000/student?rno=' + rno).then(r => {
+                    r.json().then(json => {
+                        if (json.length > 0) {
+                            alert("Already exist");
+                            return false;
+                        }
+                        else {
+                            postData(`http://localhost:3000/student`, { "rno":rno, "name":name }).then(data => console.log(JSON.stringify(data))).catch(error => console.error(error));
+                            alert("Data Inserted");
+                            window.location = "student.html";
+                        }
+                    });
+                });
+            }
+        }
+        function patchData(url = ``, data = {}) {
+            return fetch(url, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/JSON",
+                },
+                redirect: "follow",
+                body: JSON.stringify(data),
+            })
+                .then(Response => Response.json());
+        }
+        function postData(url = ``, data = {}) {
+            console.log("postData :: ", url, data)
+            return fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/JSON",
+                },
+                redirect: "follow",
+                body: JSON.stringify(data),
+            })
+                .then(Response => Response.json());
+        }
     </script>
 </head>
+
 <body>
-    <form action="" method="post">
+    <form action="" name="form1" method="post">
         <h2>Enter Details</h2>
         <table border=1>
             <tr>
-                <td>R.No.<input type="text"></td>
+                <td>R.No.<input type="text" id="srno" name="srno"></td>
             </tr>
             <tr>
-                <td>Name<input type="text"></td>
+                <td>Name<input type="text" id="sname" name="sname"></td>
             </tr>
         </table><br>
-        <button id="save">SAVE</button>
+        <button id="save" onclick="validation()">SAVE</button>
         <button id="cancel">CANCEL</button>
     </form>
-    
+
 </body>
 </html>
